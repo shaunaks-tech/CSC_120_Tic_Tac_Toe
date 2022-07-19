@@ -12,6 +12,33 @@ def check_mark(rowIn, colIn, player):
     else:
         return True
 
+def check_win(player):
+    mark=""
+    if player == "Player1":
+        mark="X"
+    else:
+        mark="O"
+
+    if board[0][0] == board[0][1] == board[0][2] == mark:
+        return True
+    elif board[1][0] == board[1][1] == board[1][2] == mark:
+        return True
+    elif board[2][0] == board[2][1] == board[2][2] == mark:
+        return True
+    elif board[0][0] == board[1][0] == board[2][0] == mark:
+        return True
+    elif board[0][1] == board[1][1] == board[2][1] == mark:
+        return True
+    elif board[0][2] == board[1][2] == board[2][2] == mark:
+        return True
+    elif board[0][0] == board[1][1] == board[2][2] == mark:
+        return True
+    elif board[2][0] == board[1][1] == board[0][2] == mark:
+        return True
+    else:
+        return False
+
+
 def set_mark(rowIn, colIn, player):
     if (player == "Player1"):
         board[rowIn][colIn] = 'X'
@@ -36,7 +63,6 @@ while counter < 9:
     else:
         player = "Player2"
 
-    #print (counter, player)
 
     rowIn = int (input(player + " select row: "))
     colIn = int (input(player + " select col: "))
@@ -54,5 +80,11 @@ while counter < 9:
 
     counter = counter + 1
     print_board(board)
+
+    if check_win(player):
+        print ("Congratulation! ", player, ", you won the game, exiting... ")
+        exit(0)
+    elif counter >= 8:
+        print("Its a draw, no one won the game ")
 
 
